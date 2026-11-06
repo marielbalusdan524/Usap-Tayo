@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usap Tayo ♡</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Arial,sans-serif;background:linear-gradient(135deg,#ffd6e5,#f5c6e7,#e8d5ff);display:flex;justify-content:center;align-items:center;padding:20px;color:#66394e}
+.container{background:white;width:100%;max-width:480px;padding:30px;border-radius:22px;box-shadow:0 8px 30px rgba(120,60,100,.15)}
+h1,h2{text-align:center;color:#d45d91}.subtitle{text-align:center;color:#987287;line-height:1.6}
+input,textarea{width:100%;padding:13px;margin:10px 0;border:1px solid #edc5d8;border-radius:10px;font-size:15px;outline:none}
+input:focus,textarea:focus{border-color:#d45d91}textarea{min-height:160px;resize:vertical;font-family:Arial;line-height:1.5}
+button{padding:13px;border:0;border-radius:10px;background:#d45d91;color:white;font-size:15px;cursor:pointer;margin-top:10px}button:hover{background:#b94479}button:disabled{opacity:.6;cursor:wait}
+.main-button{width:100%}.secondary{background:#f3dce8;color:#a34270}.button-row{display:flex;gap:10px}.button-row button{flex:1}
+.hidden{display:none!important}.question-number{text-align:center;color:#c45c8c;font-weight:bold;margin:20px 0}
+.progress{height:9px;background:#f7e3ed;border-radius:20px;overflow:hidden;margin:15px 0 25px}.progress-bar{height:100%;width:5%;background:#d45d91;transition:width .3s}
+.question-text{font-size:19px;line-height:1.5;font-weight:bold;margin-bottom:15px}.heart{text-align:center;font-size:35px}
+small{color:#a17a90}#statusMessage{text-align:center;line-height:1.5;color:#987287}
+</style></head><body>
+<div class="container" id="loginPage"><div class="heart">♡ 💗 ♡</div><h1>Usap Tayo</h1>
+<p class="subtitle">This Question Is For U may Enemy . ❤️</p>
+<form onsubmit="login(event)"><input type="text" id="username" placeholder="Ilagay ang username" required>
+<input type="password" id="password" placeholder="Ilagay ang password" required>
+<button class="main-button" type="submit">MAG-LOGIN ♡</button></form><p class="subtitle">FOR US ONLY. 💗</p></div>
+<div class="container hidden" id="welcomePage"><div class="heart">💗</div><h1>Hi, Love!</h1>
+<p class="subtitle">Way 20 ay saludsud ko laydek lang ay maamuan di marikriknam.</p>
+<p class="subtitle">Dapat maanseram amin tas be honest bawal di man etek tan baka maburis ka no manlastog ka haha..</p>
+<button class="main-button" onclick="startQuestions()">Start ♡</button></div>
+<div class="container hidden" id="questionPage"><div class="heart">♡</div><h2>Question for U Buyong</h2>
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div><div class="question-number" id="questionNumber"></div>
+<div class="question-text" id="questionText"></div>
+<textarea id="answer" placeholder="Ijust sulatsulat your answer... no limit answer ibagam di laydem ay ibaga."></textarea>
+<small>Your free to explaine. I want to know your Opinion then feelings mo ♡</small>
+<div class="button-row"><button class="secondary" onclick="previousQuestion()">PREVIOUS</button><button onclick="nextQuestion()" id="nextButton">NEXT</button></div></div>
+<div class="container hidden" id="thankYouPage"><div class="heart">💗💗💗</div><h1>Thank You, Love!</h1>
+<p class="subtitle">Thank You For your honesty.</p><p class="subtitle">Bawal pilosopo</p><h2>♡ I Love You ♡</h2>
+<p id="statusMessage" role="status">Ipinapasa ang iyong mga sagot...</p></div>
+<script>
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzK3TULSodAGSP8uiwF944Ry_vUbDx6XuGQuwZXj1vUJg420Fp9WHfyl80HWeTDfqk-IA/exec";
+const ALLOWED_USERNAME = "Kaiserpaul Dangpa";
+const ALLOWED_PASSWORD = "Buyong";
+function login(event){event.preventDefault();const u=document.getElementById("username").value,p=document.getElementById("password").value;
+if(u===ALLOWED_USERNAME&&p===ALLOWED_PASSWORD){document.getElementById("loginPage").classList.add("hidden");document.getElementById("welcomePage").classList.remove("hidden");}
+else alert("Mali ang username o password. Subukan ulit!");}
+const questions=[
+"1.Naragsak ka ba sin relasyon ta __________.",
+"2.Nanbabawi kaba ay nilayad mo saken in short pinatulaw di an-anak no cka way regrets mo ba __________.",
+"3. Mabmabay ka ba sin kandana ay relasyon __________.",
+"4. Laylaydem ba saken rate mo 1 gana si 10 __________.",
+"5. Nagsasawa ka ba sin ugalik sorry kasi napaka moody ko tas super overthinker nak aware nak phy adie eth sapay kuma ta maawatam __________.",
+"6. Ibagam daden unwanted ig-igaam ay ugalik __________.",
+"7. Ibgam dadin ugalik ay laydem ay baliwak ta man Ajust nak __________.",
+"8. Isip bata ak ba subra hahah __________.",
+"9. Ibagam ugalik ay pangit lalo na no madama di ibaw haha __________.",
+"10.Maan anusam ba din Ugalik no masmasnit ka baka laydem ay isako saken haha __________.",
+"11. Sinoy Plan mo para in daita ay dwa __________.",
+"12. sapat ba din oras ay maidawdawat kun cka __________.",
+"13. Super na Pride nak ba haha __________.",
+"14. Sinoy maibagam ta mumayat di flow nan relasyon ta __________.",
+"15. Contento ka ba in saken __________.",
+"16. Laydem ba ay Ituloy ta uray no maminsan yan ibaw is lyp __________.",
+"17. Give best memorize ay nankadkadwaan ta __________.",
+"18. Advice mo in saken si panag skwelak __________.",
+"19. makaseed ka ba ilang years hahaha laydem ba mangasawan haha __________.",
+"20. Napintasak bas panag Ilam hahah 1gana si 100 dapat 100 ohaha __________."
+];
+let currentQuestion=0;let answers=new Array(questions.length).fill("");
+function startQuestions(){document.getElementById("welcomePage").classList.add("hidden");document.getElementById("questionPage").classList.remove("hidden");showQuestion();}
+function showQuestion(){document.getElementById("questionNumber").innerText="Tanong "+(currentQuestion+1)+" of 20";
+document.getElementById("questionText").innerText=questions[currentQuestion];document.getElementById("answer").value=answers[currentQuestion];
+document.getElementById("progressBar").style.width=((currentQuestion+1)/20*100)+"%";
+document.getElementById("nextButton").innerText=currentQuestion===19?"SUBMIT ♡":"NEXT";}
+function saveAnswer(){answers[currentQuestion]=document.getElementById("answer").value;}
+function nextQuestion(){saveAnswer();if(currentQuestion<19){currentQuestion++;showQuestion();return;}
+const empty=answers.findIndex(a=>a.trim()==="");if(empty!==-1){alert("Pakisagutan muna ang tanong number "+(empty+1)+".");currentQuestion=empty;showQuestion();return;}
+if(confirm("Sigurado ka na bang ipapasa ang iyong mga sagot?"))submitAnswers();}
+function previousQuestion(){saveAnswer();if(currentQuestion>0){currentQuestion--;showQuestion();}}
+async function submitAnswers(){const btn=document.getElementById("nextButton");btn.disabled=true;btn.innerText="SUBMITTING...";
+document.getElementById("questionPage").classList.add("hidden");document.getElementById("thankYouPage").classList.remove("hidden");
+const status=document.getElementById("statusMessage");
+if(GOOGLE_SCRIPT_URL.includes("PASTE_YOUR_")){status.innerText="Hindi pa naka-connect ang Google Sheets. Ilagay muna ang Web App URL sa code.";return;}
+const payload={answers:answers,questions:questions,submittedAt:new Date().toISOString()};
+try{await fetch(GOOGLE_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+status.innerText="Naipadala na ang iyong mga sagot. Salamat! ♡";
+}catch(err){status.innerText="Hindi maipadala ngayon. Pakisubukan ulit o ipaalam sa may-ari ng form.";console.error(err);}}
+</script></body></html>
