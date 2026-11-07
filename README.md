@@ -1,4 +1,4 @@
-USAP TAYO — GOOGLE SHEETS SETUP
+Responces— GOOGLE SHEETS SETUP
 
 FILES
 - index.html: your questionnaire website
